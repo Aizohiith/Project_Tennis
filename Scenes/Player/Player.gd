@@ -99,10 +99,11 @@ func _on_sound_area_area_entered(area):
 	if area.get_parent().is_in_group("Ball"):
 		if not gb_Hit_Ball:
 			return
-		Game_Manager.gg_Screen_Shake.emit(5)
+		Game_Manager.gg_Screen_Shake.emit(10)
 		gg_Hit_Audio_Player.volume_db = linear_to_db(linear_velocity.length() / 500)
 		gg_Hit_Audio_Player.play()
 		gb_Hit_Ball = false
 	if area.get_parent().is_in_group("Player") or area.is_in_group("Sound_Area"):
+		Game_Manager.gg_Screen_Shake.emit(2)
 		gg_Bounce_Audio_Player.volume_db = linear_to_db(linear_velocity.length() / 250)
 		gg_Bounce_Audio_Player.play()

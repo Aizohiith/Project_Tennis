@@ -22,10 +22,7 @@ func _process(delta):
 		gg_Ball_Side = enum_Ball_Sides.OUT
 	elif gg_Left.Ball_Count() > gg_Right.Ball_Count():
 		gg_Ball_Side = enum_Ball_Sides.LEFT
-		print("Left ", gg_Left.Ball_Count(), gg_Right.Ball_Count())
 	elif gg_Left.Ball_Count() < gg_Right.Ball_Count():
 		gg_Ball_Side = enum_Ball_Sides.RIGHT
-		print("Right ", gg_Left.Ball_Count(), gg_Right.Ball_Count())
 	else:
 		gg_Ball_Side = enum_Ball_Sides.LINE
-		print("Line")
