@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8py68tldai28"]
+[gd_scene load_steps=3 format=3 uid="uid://b8py68tldai28"]
 
 [ext_resource type="Script" path="res://Scenes/Game_Modes/Game_Mode_Resetting_Timer/Game_Mode_Restting_Timer.gd" id="1_gy4io"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ob2fx"]
+font_size = 36
 
 [node name="Game_Mode_Restting_Timer" type="Node"]
 script = ExtResource("1_gy4io")
@@ -17,3 +20,4 @@ offset_right = 5.0
 offset_bottom = 23.0
 grow_horizontal = 2
 text = "0"
+label_settings = SubResource("LabelSettings_ob2fx")

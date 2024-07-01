@@ -18,7 +18,7 @@ script = ExtResource("1_0mnhu")
 [node name="Ball" parent="." instance=ExtResource("2_myp1h")]
 
 [node name="Camera" parent="." instance=ExtResource("3_se2vp")]
-zoom = Vector2(0.6, 0.6)
+zoom = Vector2(0.62, 0.62)
 
 [node name="Team1" parent="." instance=ExtResource("5_lr7g6")]
 

@@ -19,14 +19,17 @@ func _process(delta):
 
 	lbl_Timer.text = str(round(10 * (gf_Max_Swap_Time - gf_Time_Since_Swap)) / 10)
 	if gf_Max_Swap_Time - gf_Time_Since_Swap <= 0:
-		print("Game Over")
+		lbl_Timer.text = "Game Over\n"
 		match gg_Field.gg_Ball_Side:
 			gg_Field.enum_Ball_Sides.LEFT:
-				print("Right Won")
+				lbl_Timer.text += "Right Won\n"
 			gg_Field.enum_Ball_Sides.RIGHT:
-				print("Left Won")
+				lbl_Timer.text += "Left Won\n"
 			gg_Field.enum_Ball_Sides.LINE:
-				print("Line: Draw")
+				lbl_Timer.text += "Line: Draw\n"
 			gg_Field.enum_Ball_Sides.OUT:
-				print("OUT: Rematch")
+				lbl_Timer.text += "Out: Rematch\n"
 		get_tree().paused = true
+		await get_tree().create_timer(1.5).timeout
+		get_tree().paused = false
+		get_tree().change_scene_to_file("res://Scenes/Test/Test.tscn")
