@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cp3feam2lv7bj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2q7hc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1jruj"]
+
+[node name="Wall" type="StaticBody2D"]
+collision_mask = 0
+
+[node name="Collision_Shape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_2q7hc")
+
+[node name="Sound_Area" type="Area2D" parent="." groups=["Sound_Area"]]
+collision_layer = 16
+collision_mask = 16
+
+[node name="Collision_Shape" type="CollisionShape2D" parent="Sound_Area"]
+shape = SubResource("RectangleShape2D_1jruj")

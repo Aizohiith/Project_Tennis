@@ -1,0 +1,65 @@
+[gd_scene load_steps=13 format=3 uid="uid://gg6dyf6kdjoe"]
+
+[ext_resource type="Script" path="res://Scenes/Player/Player.gd" id="1_nspja"]
+[ext_resource type="Texture2D" uid="uid://bm23gk52shlqt" path="res://Assets/Art/Players/Player_Shadow.png" id="3_w1e2p"]
+[ext_resource type="PackedScene" uid="uid://ci0kmjp7q6pjx" path="res://Scenes/Shadow/Shadow.tscn" id="3_yadio"]
+[ext_resource type="Texture2D" uid="uid://b5pbn13cpemmf" path="res://Assets/Art/Players/Player_Base.png" id="4_ko74s"]
+[ext_resource type="Texture2D" uid="uid://dulyoovok78mr" path="res://Assets/Art/Players/Player_CDark.png" id="5_x8ru5"]
+[ext_resource type="Texture2D" uid="uid://48rrpuu5g3sb" path="res://Assets/Art/Players/Player_CLight.png" id="6_nfuxt"]
+[ext_resource type="Texture2D" uid="uid://cu8ej7abeiob2" path="res://Assets/Art/Players/Player_Eye_Inner.png" id="7_4hdsk"]
+[ext_resource type="Texture2D" uid="uid://c5k2gfi21qpm8" path="res://Assets/Art/Players/Player_Eye_Outer.png" id="8_a5777"]
+[ext_resource type="Texture2D" uid="uid://cmr7trsxaiop5" path="res://Assets/Art/Players/Player_Outline.png" id="9_t0k02"]
+[ext_resource type="Texture2D" uid="uid://qtkohs13ir83" path="res://Assets/Art/Players/Player_Hair.png" id="10_eo34k"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_u2gy5"]
+bounce = 0.75
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wjdho"]
+radius = 64.4981
+
+[node name="Player" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 15
+input_pickable = true
+mass = 0.1
+physics_material_override = SubResource("PhysicsMaterial_u2gy5")
+script = ExtResource("1_nspja")
+
+[node name="Shadow" parent="." instance=ExtResource("3_yadio")]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_w1e2p")
+gi_Max_Track = 2
+
+[node name="Sprites" type="Node2D" parent="."]
+rotation = -1.5708
+scale = Vector2(0.25, 0.25)
+
+[node name="Base" type="Sprite2D" parent="Sprites"]
+self_modulate = Color(1, 0, 1, 1)
+texture = ExtResource("4_ko74s")
+
+[node name="PlayerCDark" type="Sprite2D" parent="Sprites"]
+self_modulate = Color(0.999998, 0.312073, 0.993199, 1)
+texture = ExtResource("5_x8ru5")
+
+[node name="PlayerCLight" type="Sprite2D" parent="Sprites"]
+self_modulate = Color(0.869173, 0.607931, 0.988909, 1)
+texture = ExtResource("6_nfuxt")
+
+[node name="PlayerEyeOuter" type="Sprite2D" parent="Sprites"]
+self_modulate = Color(1, 0.86, 0.990667, 1)
+texture = ExtResource("8_a5777")
+
+[node name="PlayerEyeInner" type="Sprite2D" parent="Sprites"]
+self_modulate = Color(0.976471, 0.486275, 1, 1)
+texture = ExtResource("7_4hdsk")
+
+[node name="PlayerOutline" type="Sprite2D" parent="Sprites"]
+texture = ExtResource("9_t0k02")
+
+[node name="PlayerHair" type="Sprite2D" parent="Sprites"]
+texture = ExtResource("10_eo34k")
+
+[node name="Collision_Shape" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_wjdho")

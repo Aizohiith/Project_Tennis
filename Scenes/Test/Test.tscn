@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://cvxg760vnr6ej"]
+
+[ext_resource type="Script" path="res://Scenes/Test/Test.gd" id="1_0mnhu"]
+[ext_resource type="PackedScene" uid="uid://wbchfkq1w0bd" path="res://Scenes/Field/Field.tscn" id="1_5g2yu"]
+[ext_resource type="PackedScene" uid="uid://dv5u1iklfse6x" path="res://Scenes/Ball/Ball.tscn" id="2_myp1h"]
+[ext_resource type="PackedScene" uid="uid://bexdp4tfdaksw" path="res://Scenes/Camera/Camera.tscn" id="3_se2vp"]
+[ext_resource type="PackedScene" uid="uid://gg6dyf6kdjoe" path="res://Scenes/Player/Player.tscn" id="4_m25t8"]
+[ext_resource type="PackedScene" uid="uid://s1d1bma400n2" path="res://Scenes/Team/Team.tscn" id="5_lr7g6"]
+
+[node name="Test" type="Node2D"]
+script = ExtResource("1_0mnhu")
+
+[node name="Field" parent="." instance=ExtResource("1_5g2yu")]
+
+[node name="Ball" parent="." instance=ExtResource("2_myp1h")]
+
+[node name="Camera" parent="." instance=ExtResource("3_se2vp")]
+zoom = Vector2(0.6, 0.6)
+
+[node name="Team1" parent="." instance=ExtResource("5_lr7g6")]
+
+[node name="Player" parent="Team1" instance=ExtResource("4_m25t8")]
+position = Vector2(-264, 168)
+
+[node name="Player2" parent="Team1" instance=ExtResource("4_m25t8")]
+position = Vector2(-752, -208)
+
+[node name="Team2" parent="." instance=ExtResource("5_lr7g6")]
+
+[node name="Player3" parent="Team2" instance=ExtResource("4_m25t8")]
+position = Vector2(744, 176)
+gb_AI = true
+
+[node name="Player4" parent="Team2" instance=ExtResource("4_m25t8")]
+position = Vector2(368, -176)
+gb_AI = true

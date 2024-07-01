@@ -1,0 +1,56 @@
+[gd_scene load_steps=10 format=3 uid="uid://dv5u1iklfse6x"]
+
+[ext_resource type="Script" path="res://Scenes/Ball/Ball.gd" id="1_34648"]
+[ext_resource type="Texture2D" uid="uid://cqfeuh0ho7ayv" path="res://Assets/Art/Ball/Ball.png" id="1_un044"]
+[ext_resource type="PackedScene" uid="uid://ci0kmjp7q6pjx" path="res://Scenes/Shadow/Shadow.tscn" id="2_3rrws"]
+[ext_resource type="Texture2D" uid="uid://ctja8hivjewha" path="res://Assets/Art/Ball/Ball_Shadow.png" id="3_6xg4y"]
+[ext_resource type="AudioStream" uid="uid://b35ahci2g574w" path="res://Assets/Sound/Effects/Bouncec_1.mp3" id="4_kqxkv"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ltbo6"]
+bounce = 0.95
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ixi22"]
+radius = 32.9848
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uuxua"]
+radius = 36.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wc4xm"]
+radius = 32.0
+
+[node name="Ball" type="RigidBody2D" groups=["Ball"]]
+collision_layer = 4
+collision_mask = 7
+mass = 0.01
+physics_material_override = SubResource("PhysicsMaterial_ltbo6")
+script = ExtResource("1_34648")
+
+[node name="Shadow" parent="." instance=ExtResource("2_3rrws")]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("3_6xg4y")
+
+[node name="Ball" type="Sprite2D" parent="."]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("1_un044")
+
+[node name="Collision_Shape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ixi22")
+
+[node name="Sound_Area" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 16
+
+[node name="Collision_Shape" type="CollisionShape2D" parent="Sound_Area"]
+shape = SubResource("CircleShape2D_uuxua")
+
+[node name="Traker_Area" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="Collision_Shape" type="CollisionShape2D" parent="Traker_Area"]
+shape = SubResource("CircleShape2D_wc4xm")
+
+[node name="Bounce_Audio_Player" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_kqxkv")
+
+[connection signal="area_entered" from="Sound_Area" to="." method="_on_sound_area_area_entered"]

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://w0ds8p0p25sk"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tbsvw"]
+bounce = 0.5
+absorbent = true
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sgjji"]
+
+[node name="Nett" type="StaticBody2D"]
+collision_layer = 8
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_tbsvw")
+
+[node name="Collision_Shape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_sgjji")
