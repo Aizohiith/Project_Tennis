@@ -39,6 +39,7 @@ func Done_Load_Game():
 		T2.gf_Max_Swap_Time = gg_Game_Setup["Time"]
 		T1.add_child(T2)
 	get_tree().root.add_child(T1)
+	get_tree().current_scene = T1
 	
 func Done_Load_Scene():
 	var ll_Scene = ResourceLoader.load_threaded_get(gs_Next_Scene)
