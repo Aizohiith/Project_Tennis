@@ -50,11 +50,11 @@ rotation = -1.5708
 scale = Vector2(0.25, 0.25)
 
 [node name="Base" type="Sprite2D" parent="Sprites"]
-self_modulate = Color(1, 0, 1, 1)
+self_modulate = Color(0, 0.722479, 0.632888, 1)
 texture = ExtResource("4_ko74s")
 
 [node name="PlayerCDark" type="Sprite2D" parent="Sprites"]
-self_modulate = Color(0.999998, 0.312073, 0.993199, 1)
+self_modulate = Color(0, 0.76658, 0.687658, 1)
 texture = ExtResource("5_x8ru5")
 
 [node name="PlayerCLight" type="Sprite2D" parent="Sprites"]
@@ -80,6 +80,7 @@ visible = false
 shape = SubResource("CircleShape2D_wjdho")
 
 [node name="Sound_Area" type="Area2D" parent="." groups=["Sound_Area"]]
+visible = false
 collision_layer = 16
 collision_mask = 16
 

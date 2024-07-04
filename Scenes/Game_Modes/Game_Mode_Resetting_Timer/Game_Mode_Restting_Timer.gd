@@ -32,4 +32,4 @@ func _process(delta):
 		get_tree().paused = true
 		await get_tree().create_timer(1.5).timeout
 		get_tree().paused = false
-		get_tree().change_scene_to_file("res://Scenes/Test/Test.tscn")
+		Load_Manager.Load_Scene("res://Scenes/Test/Test.tscn")

@@ -6,7 +6,8 @@ extends Node2D
 
 var garr_Sprites = [
 	preload("res://Assets/Art/Field/Field.png"),
-	preload("res://Assets/Art/Field/Field2.png")
+	preload("res://Assets/Art/Field/Field2.png"),
+	preload("res://Assets/Art/Field/Field3.png")
 ]
 
 enum enum_Ball_Sides {LEFT, RIGHT, LINE, OUT}

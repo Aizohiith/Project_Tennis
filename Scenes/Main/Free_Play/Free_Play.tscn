@@ -1,0 +1,159 @@
+[gd_scene load_steps=6 format=3 uid="uid://bgatks0y1egv2"]
+
+[ext_resource type="Theme" uid="uid://ub587t65ll50" path="res://Scenes/UI/Themr.theme" id="1_818dp"]
+[ext_resource type="Script" path="res://Scenes/Main/Free_Play/Free_Play.gd" id="2_6siye"]
+[ext_resource type="Texture2D" uid="uid://uvhlp8b3tjlb" path="res://Assets/Art/Field/Field.png" id="3_0fdue"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_lsr1f"]
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_v7bvm"]
+font_size = 28
+
+[node name="Free_Play" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_818dp")
+script = ExtResource("2_6siye")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+self_modulate = Color(0.513233, 0.513233, 0.513233, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_0fdue")
+expand_mode = 1
+
+[node name="Done" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.666667
+anchor_top = 0.216049
+anchor_right = 1.0
+anchor_bottom = 0.783951
+offset_left = -0.000366211
+offset_top = 132.0
+offset_right = -0.000366211
+offset_bottom = 132.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Done"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Play" type="Button" parent="Done/VBoxContainer"]
+layout_mode = 2
+text = "Play"
+
+[node name="Back" type="Button" parent="Done/VBoxContainer"]
+layout_mode = 2
+text = "Back"
+
+[node name="Setup" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.0987654
+anchor_right = 0.569444
+anchor_bottom = 0.308642
+offset_right = 40.0
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Setup"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.0955882
+offset_bottom = 102.0
+grow_horizontal = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Setup/VBoxContainer"]
+layout_mode = 2
+text = "Game Setup"
+label_settings = SubResource("LabelSettings_lsr1f")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Setup/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Setup/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="Setup/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Game Mode:"
+label_settings = SubResource("LabelSettings_v7bvm")
+
+[node name="Game_Mode_Option_Button" type="OptionButton" parent="Setup/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Mode_Setup" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.375
+anchor_top = 0.0987654
+anchor_right = 0.690972
+anchor_bottom = 0.623457
+offset_left = -424.0
+offset_top = 232.0
+offset_right = -52.0
+offset_bottom = 232.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Mode_Setup"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Mode_Setup/VBoxContainer"]
+layout_mode = 2
+
+[node name="Timer" type="Label" parent="Mode_Setup/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Timer:"
+
+[node name="VSeparator" type="VSeparator" parent="Mode_Setup/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Timer_Amount" type="SpinBox" parent="Mode_Setup/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+min_value = 1.0
+value = 5.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Mode_Setup/VBoxContainer"]
+layout_mode = 2
+
+[node name="Ball_Count2" type="Label" parent="Mode_Setup/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Balls: "
+
+[node name="VSeparator" type="VSeparator" parent="Mode_Setup/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="Ball_Count" type="SpinBox" parent="Mode_Setup/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+min_value = 1.0
+max_value = 50.0
+value = 1.0
+
+[connection signal="pressed" from="Done/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Done/VBoxContainer/Back" to="." method="_on_back_pressed"]

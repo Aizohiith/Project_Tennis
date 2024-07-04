@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjukpyk0as5b4"]
+
+[ext_resource type="Texture2D" uid="uid://bbr8bcybl3b87" path="res://Assets/Art/Basic Shapes/Square.png" id="1_pjjpr"]
+[ext_resource type="Script" path="res://Scenes/UI/Button/Button.gd" id="1_xeaus"]
+
+[node name="Button" type="Control"]
+layout_mode = 3
+anchor_right = 0.043
+anchor_bottom = 0.077
+offset_right = 0.463997
+offset_bottom = 0.103996
+script = ExtResource("1_xeaus")
+
+[node name="Texture_Button" type="TextureButton" parent="."]
+self_modulate = Color(1, 0, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture_normal = ExtResource("1_pjjpr")
+
+[node name="Text" type="Label" parent="Texture_Button"]
+top_level = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.0434028
+anchor_bottom = 0.0771605
+grow_horizontal = 2
+grow_vertical = 2
+text = "vzxcvzxcv"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 4
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="Texture_Button" to="." method="_on_texture_button_pressed"]

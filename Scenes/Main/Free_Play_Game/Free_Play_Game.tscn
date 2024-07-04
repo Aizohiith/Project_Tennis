@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://cxrf7jys8qksb"]
+
+[ext_resource type="PackedScene" uid="uid://wbchfkq1w0bd" path="res://Scenes/Field/Field.tscn" id="1_3qob8"]
+[ext_resource type="Script" path="res://Scenes/Main/Free_Play_Game/Free_Play_Game.gd" id="1_jxikn"]
+[ext_resource type="PackedScene" uid="uid://bexdp4tfdaksw" path="res://Scenes/Camera/Camera.tscn" id="2_w4617"]
+[ext_resource type="PackedScene" uid="uid://s1d1bma400n2" path="res://Scenes/Team/Team.tscn" id="4_fskmj"]
+
+[node name="Free_Play_Game" type="Node2D"]
+script = ExtResource("1_jxikn")
+
+[node name="Field" parent="." instance=ExtResource("1_3qob8")]
+
+[node name="Camera" parent="." instance=ExtResource("2_w4617")]
+
+[node name="Team1" parent="." instance=ExtResource("4_fskmj")]
+
+[node name="Team2" parent="." instance=ExtResource("4_fskmj")]

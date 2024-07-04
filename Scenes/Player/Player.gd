@@ -20,7 +20,7 @@ var gb_Hit_Ball : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	gg_Sprite_Arrow.visible = gb_Hold
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

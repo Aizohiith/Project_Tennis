@@ -26,7 +26,8 @@ zoom = Vector2(0.62, 0.62)
 position = Vector2(-264, 168)
 
 [node name="Player2" parent="Team1" instance=ExtResource("4_m25t8")]
-position = Vector2(-752, -208)
+position = Vector2(-688, -184)
+gb_AI = true
 
 [node name="Team2" parent="." instance=ExtResource("5_lr7g6")]
 
@@ -34,6 +35,6 @@ position = Vector2(-752, -208)
 position = Vector2(744, 176)
 gb_AI = true
 
-[node name="Player4" parent="Team2" instance=ExtResource("4_m25t8")]
-position = Vector2(368, -176)
+[node name="Player5" parent="Team2" instance=ExtResource("4_m25t8")]
+position = Vector2(272, -256)
 gb_AI = true

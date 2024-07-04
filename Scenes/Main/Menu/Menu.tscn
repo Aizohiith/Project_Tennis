@@ -1,0 +1,88 @@
+[gd_scene load_steps=5 format=3 uid="uid://dntuelnc160r"]
+
+[ext_resource type="Theme" uid="uid://ub587t65ll50" path="res://Scenes/UI/Themr.theme" id="1_84ohe"]
+[ext_resource type="Script" path="res://Scenes/Main/Menu/Menu.gd" id="2_v3yvq"]
+[ext_resource type="Texture2D" uid="uid://uvhlp8b3tjlb" path="res://Assets/Art/Field/Field.png" id="3_cli78"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_hikpv"]
+font_size = 126
+font_color = Color(1, 1, 1, 0.65098)
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_84ohe")
+script = ExtResource("2_v3yvq")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+self_modulate = Color(0.513233, 0.513233, 0.513233, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_cli78")
+expand_mode = 1
+
+[node name="Name" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -303.5
+offset_top = 45.0
+offset_right = 303.5
+offset_bottom = 177.0
+grow_horizontal = 2
+text = "Soccledon"
+label_settings = SubResource("LabelSettings_hikpv")
+
+[node name="Panel" type="Panel" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.378
+anchor_top = 0.241
+anchor_right = 0.618
+anchor_bottom = 0.753
+offset_left = 0.543976
+offset_top = 107.832
+offset_right = 4.06396
+offset_bottom = 112.056
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Campaign" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Campaign"
+
+[node name="Skirmish" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Skirmish
+"
+
+[node name="Settings" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="Quit" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="Panel/VBoxContainer/Skirmish" to="." method="_on_skirmish_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
