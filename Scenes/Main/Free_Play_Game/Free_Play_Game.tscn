@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cxrf7jys8qksb"]
+[gd_scene load_steps=6 format=3 uid="uid://cxrf7jys8qksb"]
 
 [ext_resource type="PackedScene" uid="uid://wbchfkq1w0bd" path="res://Scenes/Field/Field.tscn" id="1_3qob8"]
 [ext_resource type="Script" path="res://Scenes/Main/Free_Play_Game/Free_Play_Game.gd" id="1_jxikn"]
 [ext_resource type="PackedScene" uid="uid://bexdp4tfdaksw" path="res://Scenes/Camera/Camera.tscn" id="2_w4617"]
 [ext_resource type="PackedScene" uid="uid://s1d1bma400n2" path="res://Scenes/Team/Team.tscn" id="4_fskmj"]
+[ext_resource type="Theme" uid="uid://ub587t65ll50" path="res://Scenes/UI/Themr.theme" id="5_y1dgy"]
 
 [node name="Free_Play_Game" type="Node2D"]
 script = ExtResource("1_jxikn")
@@ -15,3 +16,40 @@ script = ExtResource("1_jxikn")
 [node name="Team1" parent="." instance=ExtResource("4_fskmj")]
 
 [node name="Team2" parent="." instance=ExtResource("4_fskmj")]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="UI"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_y1dgy")
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="Panel" parent="UI/UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Quit" type="Button" parent="UI/UI/Panel"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.413194
+anchor_top = 0.445988
+anchor_right = 0.586806
+anchor_bottom = 0.554012
+grow_horizontal = 2
+grow_vertical = 2
+text = "Quit"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="UI/UI/Panel/Quit" to="." method="_on_quit_pressed"]

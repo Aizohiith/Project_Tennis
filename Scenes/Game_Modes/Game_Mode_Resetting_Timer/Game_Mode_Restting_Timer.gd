@@ -41,6 +41,8 @@ func _process(delta):
 			gg_Field.enum_Ball_Sides.OUT:
 				lbl_Timer.text += "Out: Rematch\n"
 		get_tree().paused = true
+		if gi_Team_1_Score == 5 and gi_Team_2_Score == 0:
+			Game_Manager.Set_Achievement("5/0")
 		await get_tree().create_timer(1.5).timeout
 		get_tree().paused = false
 		Reset()
@@ -58,3 +60,4 @@ func Reset():
 	var larr_Players = get_tree().get_nodes_in_group("Player")
 	for C1 in range(len(larr_Players)):
 		larr_Players[C1].freeze = true
+		larr_Players[C1].Reset()

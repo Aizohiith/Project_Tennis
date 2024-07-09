@@ -4,12 +4,15 @@ extends RigidBody2D
 @export var gf_AI_Shoot_Interval_Mean : float = 1.5
 @export var gf_AI_Shoot_Interval_STD : float = 1.0
 
+var gb_Selected : bool = false
 var gb_Hold : bool = false
 var gv2_Hold_Pos : Vector2
 var gf_Time_Since_Last_Shoot : float = 0
 var gf_AI_Shoot_Interval : float = 0
 var gb_Hit_Ball : bool = false
+var gf_Time_Since_Last_Selection : float = 0
 
+@onready var gg_Sprites = $Sprites
 @onready var gg_Player_CDark = $Sprites/PlayerCDark
 @onready var gg_Player_CLight = $Sprites/PlayerCLight
 @onready var gg_Player_Eye_Outer = $Sprites/PlayerEyeOuter
@@ -27,11 +30,20 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if (freeze):
-		Reset()
+		Reset_Movement()
 	gf_Time_Since_Last_Shoot += delta
 	if (gf_Time_Since_Last_Shoot > 0.5):
 		gb_Hit_Ball = false
 	gg_Sprite_Arrow.visible = gb_Hold
+	if gb_Selected and not gb_AI:
+		gf_Time_Since_Last_Selection += delta
+		gg_Sprites.modulate.r = 1.5
+		gg_Sprites.modulate.g = 1.5
+		gg_Sprites.modulate.b = 1.5
+	else:
+		gg_Sprites.modulate.r = 1
+		gg_Sprites.modulate.g = 1
+		gg_Sprites.modulate.b = 1
 	if gb_Hold:
 		var lv2_Dir = get_global_mouse_position() - gv2_Hold_Pos
 		var lf_Shoot_Power = lv2_Dir.length() * 100
@@ -41,18 +53,96 @@ func _process(delta):
 	if Input.is_action_just_pressed("Hold") and not gb_Hold:
 		if gb_AI:
 			return
+		if not gb_Selected:
+			return
 		gb_Hold = true
-		set_axis_velocity(Vector2(0, 0))
+		freeze = true
 		gv2_Hold_Pos = get_global_mouse_position()
+	Handel_Selection()
 	Human_Rotate()
 	Human_Shoot()
 	AI_Shoot()
 
+func Handel_Selection():
+	if gb_AI:
+		return
+	if gf_Time_Since_Last_Selection < 0.1 or not gb_Selected:
+		return
+	var ll_Next_Player = null
+	if Input.is_action_just_pressed("Up"):
+		var larr_Players = get_tree().get_nodes_in_group("Player")
+		for C1 in range(len(larr_Players)):
+			if larr_Players[C1] == self:
+				continue
+			if larr_Players[C1].gb_AI:
+				continue
+			if larr_Players[C1].global_position.y > global_position.y:
+				continue
+			if not ll_Next_Player:
+				ll_Next_Player = larr_Players[C1]
+				continue
+			if global_position.distance_to(larr_Players[C1].global_position) < global_position.distance_to(ll_Next_Player.global_position):
+				ll_Next_Player = larr_Players[C1]
+				
+	if Input.is_action_just_pressed("Down"):
+		var larr_Players = get_tree().get_nodes_in_group("Player")
+		for C1 in range(len(larr_Players)):
+			if larr_Players[C1] == self:
+				continue
+			if larr_Players[C1].gb_AI:
+				continue
+			if larr_Players[C1].global_position.y < global_position.y:
+				continue
+			if not ll_Next_Player:
+				ll_Next_Player = larr_Players[C1]
+				continue
+			if global_position.distance_to(larr_Players[C1].global_position) < global_position.distance_to(ll_Next_Player.global_position):
+				ll_Next_Player = larr_Players[C1]
+	
+	if Input.is_action_just_pressed("Left"):
+		var larr_Players = get_tree().get_nodes_in_group("Player")
+		for C1 in range(len(larr_Players)):
+			if larr_Players[C1] == self:
+				continue
+			if larr_Players[C1].gb_AI:
+				continue
+			if larr_Players[C1].global_position.x > global_position.x:
+				continue
+			if not ll_Next_Player:
+				ll_Next_Player = larr_Players[C1]
+				continue
+			if global_position.distance_to(larr_Players[C1].global_position) < global_position.distance_to(ll_Next_Player.global_position):
+				ll_Next_Player = larr_Players[C1]
+				
+	if Input.is_action_just_pressed("Right"):
+		var larr_Players = get_tree().get_nodes_in_group("Player")
+		for C1 in range(len(larr_Players)):
+			if larr_Players[C1] == self:
+				continue
+			if larr_Players[C1].gb_AI:
+				continue
+			if larr_Players[C1].global_position.x < global_position.x:
+				continue
+			if not ll_Next_Player:
+				ll_Next_Player = larr_Players[C1]
+				continue
+			if global_position.distance_to(larr_Players[C1].global_position) < global_position.distance_to(ll_Next_Player.global_position):
+				ll_Next_Player = larr_Players[C1]
+	if ll_Next_Player:
+		ll_Next_Player.gb_Selected = true
+		ll_Next_Player.gf_Time_Since_Last_Selection = 0
+		gf_Time_Since_Last_Selection = 0
+		gb_Selected = false
 		
-func Reset():
+		
+	
+func Reset_Movement():
 	await  get_tree().create_timer(0.01).timeout
 	set_axis_velocity(Vector2(0, 0))
 	freeze = false
+
+func Reset():
+	Reset_Movement()
 	gb_Hold = false
 	gb_Hit_Ball = false
 	
@@ -70,7 +160,7 @@ func AI_Shoot():
 		gf_AI_Shoot_Interval = Game_Manager.Generate_Normal_Distributed_Float(gf_AI_Shoot_Interval_Mean, gf_AI_Shoot_Interval_STD)
 		var lv2_Dir = Game_Manager.Generate_Random_2D_Vector() * randf_range(0, 1)
 		look_at(lv2_Dir)
-		Shoot(lv2_Dir)
+		Shoot(lv2_Dir - global_position)
 	
 func Human_Shoot():
 	if gb_AI:

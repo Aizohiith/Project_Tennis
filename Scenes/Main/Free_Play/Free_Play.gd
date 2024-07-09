@@ -10,7 +10,6 @@ extends Control
 
 const GAME_MODES = {
 	"Time Rush" : "res://Scenes/Main/Free_Play_Game/Free_Play_Game.tscn",
-	"Test" : "res://Scenes/Test/Test.tscn"
 }
 # Called when the node enters the scene tree for the first time.
 func _ready():

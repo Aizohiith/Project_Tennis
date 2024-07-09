@@ -106,7 +106,6 @@ size_flags_horizontal = 3
 alignment = 1
 
 [node name="Mode_Setup" type="Panel" parent="."]
-self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.375
@@ -189,6 +188,7 @@ max_value = 50.0
 value = 1.0
 
 [node name="HBoxContainer5" type="HBoxContainer" parent="Mode_Setup/VBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="Team2" type="Label" parent="Mode_Setup/VBoxContainer/HBoxContainer5"]
@@ -203,6 +203,7 @@ layout_mode = 2
 flat = true
 
 [node name="HBoxContainer6" type="HBoxContainer" parent="Mode_Setup/VBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="Team2" type="Label" parent="Mode_Setup/VBoxContainer/HBoxContainer6"]
@@ -214,6 +215,7 @@ layout_mode = 2
 
 [node name="Team_2_AI" type="CheckBox" parent="Mode_Setup/VBoxContainer/HBoxContainer6"]
 layout_mode = 2
+button_pressed = true
 flat = true
 
 [connection signal="pressed" from="Done/VBoxContainer/Play" to="." method="_on_play_pressed"]

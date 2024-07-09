@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var gg_Team_1 = $Team1
 @onready var gg_Team_2 = $Team2
+@onready var gg_UI = $UI/UI
 
 var gg_Ball_Scene = preload("res://Scenes/Ball/Ball.tscn")
 var gg_Player_Scene = preload("res://Scenes/Player/Player.tscn")
@@ -24,11 +25,15 @@ func _ready():
 	for C1 in range(gi_Team_1_Count):
 		var T1 = gg_Player_Scene.instantiate()
 		T1.global_position = Vector2(-500, 0)
+		if C1 == 0:
+			T1.gb_Selected = true
 		gg_Team_1.add_child(T1)
 		
 	for C1 in range(gi_Team_2_Count):
 		var T1 = gg_Player_Scene.instantiate()
 		T1.global_position = Vector2(500, 0)
+		if C1 == 0:
+			T1.gb_Selected = true
 		gg_Team_2.add_child(T1)
 		
 	
@@ -43,4 +48,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if Input.is_action_just_pressed("Abort"):
+		gg_UI.visible = !gg_UI.visible
+		
+
+
+func _on_quit_pressed():
+	Load_Manager.Load_Scene("res://Scenes/Main/Free_Play/Free_Play.tscn")

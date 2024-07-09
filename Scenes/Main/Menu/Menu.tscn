@@ -32,16 +32,15 @@ expand_mode = 1
 
 [node name="Name" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -303.5
-offset_top = 45.0
-offset_right = 303.5
-offset_bottom = 177.0
+anchors_preset = -1
+anchor_left = 0.236545
+anchor_right = 0.763455
+anchor_bottom = 0.203704
 grow_horizontal = 2
 text = "Soccledon"
 label_settings = SubResource("LabelSettings_hikpv")
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Panel" type="Panel" parent="."]
 self_modulate = Color(1, 1, 1, 0)
@@ -67,14 +66,14 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Campaign" type="Button" parent="Panel/VBoxContainer"]
-layout_mode = 2
-text = "Campaign"
-
 [node name="Skirmish" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
 text = "Skirmish
 "
+
+[node name="Help" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Help"
 
 [node name="Settings" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
@@ -84,5 +83,60 @@ text = "Settings"
 layout_mode = 2
 text = "Quit"
 
+[node name="Help" type="Window" parent="."]
+title = "Help"
+initial_position = 2
+size = Vector2i(300, 500)
+unresizable = true
+
+[node name="Control" type="Control" parent="Help"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Help/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Help/Control/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "**Game Tutorial**
+
+Welcome to the Beta version of our game! This help feature is only available for the Beta, and a proper tutorial will be added later. We would greatly appreciate detailed feedback on absolutely anything you encounter.
+
+**How to Play**
+
+1. **Start a Game**:
+   - Click on \"Skirmish\" to begin playing.
+   - Here, you can pick the game mode (currently, only one game mode is available).
+   - Select the settings for the game mode, then click \"Play.\"
+
+**Controls**
+
+- **Menu**: Press `Esc` to open the menu during the game.
+- **Shooting**:
+  - Left-click and hold anywhere on the screen to lock onto the current player.
+  - Drag and release to shoot.
+- **Player Selection/Movement**: Use the `WASD` keys to select and move between your own players.
+
+Thank you for participating in our Beta! Your feedback is invaluable to us."
+horizontal_alignment = 1
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
 [connection signal="pressed" from="Panel/VBoxContainer/Skirmish" to="." method="_on_skirmish_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Help" to="." method="_on_help_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="close_requested" from="Help" to="." method="_on_help_close_requested"]

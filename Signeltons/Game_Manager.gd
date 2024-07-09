@@ -21,7 +21,8 @@ var gg_Game_Setup_Template = {
 func _init():
 	OS.set_environment("SteanAppID", gs_App_ID)
 	OS.set_environment("SteamGameID", gs_App_ID)
-	
+	Set_Achievement("GS")
+
 func _process(delta):
 	Steam.run_callbacks()
 
@@ -30,8 +31,6 @@ func _ready():
 	var lb_Steam_Running = Steam.isSteamRunning()
 	print(ll_Init)
 	print(lb_Steam_Running)
-	print(Steam.getAchievementName(0))
-	print(Steam.getAchievement("TEST"))
 
 
 	
@@ -51,5 +50,6 @@ func Clear_Achievement(ps_Name):
 	Steam.storeStats()
 
 func Set_Achievement(ps_Name):
-	Steam.setAchievement(ps_Name)
-	Steam.storeStats()
+	if not Steam.getAchievement(ps_Name).achieved:
+		Steam.setAchievement(ps_Name)
+		Steam.storeStats()
