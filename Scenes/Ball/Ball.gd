@@ -3,13 +3,18 @@ extends RigidBody2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
+	Reset()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if (freeze):
+		Reset()
 
+func Reset():
+	await  get_tree().create_timer(0.01).timeout
+	set_axis_velocity(Vector2(0, 0))
+	global_position = Vector2(0, 0)
+	freeze = false
 
 func _on_sound_area_area_entered(area):
 	Game_Manager.gg_Screen_Shake.emit(1)

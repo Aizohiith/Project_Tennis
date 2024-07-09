@@ -21,7 +21,6 @@ func _process(delta):
 	if not (gb_Prossesing):
 		return
 	ResourceLoader.load_threaded_get_status(gs_Next_Scene, garr_Progress)
-	print(garr_Progress[0])
 	if garr_Progress[0] >= 1:
 		gb_Prossesing = false
 		await  get_tree().create_timer(0.5).timeout
@@ -33,13 +32,19 @@ func _process(delta):
 func Done_Load_Game():
 	var ll_Scene = ResourceLoader.load_threaded_get(gs_Next_Scene)
 	var T1 = ll_Scene.instantiate()
-	T1.gi_Ball_Count = gg_Game_Setup["Balls"]
-	if gg_Game_Setup["Mode"] == "Time Rush":
+	T1.gi_Ball_Count = gg_Game_Setup.Balls
+	T1.gi_Team_1_Count = gg_Game_Setup.Team_1.Players
+	T1.gi_Team_2_Count = gg_Game_Setup.Team_2.Players
+	T1.gb_Team_1_AI = gg_Game_Setup.Team_1.AI
+	T1.gb_Team_2_AI = gg_Game_Setup.Team_2.AI
+	
+	if gg_Game_Setup.Mode == "Time Rush":
 		var T2 = (load("res://Scenes/Game_Modes/Game_Mode_Resetting_Timer/Game_Mode_Restting_Timer.tscn") as PackedScene).instantiate()
-		T2.gf_Max_Swap_Time = gg_Game_Setup["Time"]
+		T2.gf_Max_Swap_Time = gg_Game_Setup.Time
 		T1.add_child(T2)
 	get_tree().root.add_child(T1)
 	get_tree().current_scene = T1
+	get_tree().get_first_node_in_group("Loading").queue_free()
 	
 func Done_Load_Scene():
 	var ll_Scene = ResourceLoader.load_threaded_get(gs_Next_Scene)

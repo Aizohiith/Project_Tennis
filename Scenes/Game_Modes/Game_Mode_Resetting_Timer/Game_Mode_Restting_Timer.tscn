@@ -1,11 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://b8py68tldai28"]
+[gd_scene load_steps=4 format=3 uid="uid://b8py68tldai28"]
 
 [ext_resource type="Script" path="res://Scenes/Game_Modes/Game_Mode_Resetting_Timer/Game_Mode_Restting_Timer.gd" id="1_gy4io"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ob2fx"]
 font_size = 36
 
-[node name="Game_Mode_Restting_Timer" type="Node"]
+[sub_resource type="LabelSettings" id="LabelSettings_4wf1t"]
+font_size = 36
+
+[node name="Node" type="Node"]
 script = ExtResource("1_gy4io")
 
 [node name="UI" type="CanvasLayer" parent="."]
@@ -21,3 +24,22 @@ offset_bottom = 23.0
 grow_horizontal = 2
 text = "0"
 label_settings = SubResource("LabelSettings_ob2fx")
+
+[node name="Left_Score" type="Label" parent="UI"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Team 1: 0"
+label_settings = SubResource("LabelSettings_4wf1t")
+vertical_alignment = 1
+
+[node name="Right_Score" type="Label" parent="UI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -166.0
+offset_bottom = 50.0
+grow_horizontal = 0
+text = "Team 2: 0"
+label_settings = SubResource("LabelSettings_4wf1t")
+horizontal_alignment = 2
+vertical_alignment = 1

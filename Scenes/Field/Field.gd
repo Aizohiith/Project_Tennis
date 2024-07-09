@@ -15,7 +15,7 @@ var gg_Ball_Side = enum_Ball_Sides.LINE
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	gg_Sprite.texture = garr_Sprites.pick_random()
+	Reset()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -27,3 +27,7 @@ func _process(delta):
 		gg_Ball_Side = enum_Ball_Sides.RIGHT
 	else:
 		gg_Ball_Side = enum_Ball_Sides.LINE
+		
+func Reset():
+	gg_Ball_Side = enum_Ball_Sides.LINE
+	gg_Sprite.texture = garr_Sprites.pick_random()

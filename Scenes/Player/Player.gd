@@ -5,6 +5,7 @@ extends RigidBody2D
 @export var gf_AI_Shoot_Interval_STD : float = 1.0
 
 var gb_Hold : bool = false
+var gv2_Hold_Pos : Vector2
 var gf_Time_Since_Last_Shoot : float = 0
 var gf_AI_Shoot_Interval : float = 0
 var gb_Hit_Ball : bool = false
@@ -25,31 +26,42 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if (freeze):
+		Reset()
 	gf_Time_Since_Last_Shoot += delta
 	if (gf_Time_Since_Last_Shoot > 0.5):
 		gb_Hit_Ball = false
 	gg_Sprite_Arrow.visible = gb_Hold
 	if gb_Hold:
-		var lv2_Dir = get_global_mouse_position() - global_position
+		var lv2_Dir = get_global_mouse_position() - gv2_Hold_Pos
 		var lf_Shoot_Power = lv2_Dir.length() * 100
 		lf_Shoot_Power = clamp(lf_Shoot_Power, 100, 10000)
 		gg_Sprite_Arrow.scale.x = lf_Shoot_Power/1000
+		
+	if Input.is_action_just_pressed("Hold") and not gb_Hold:
+		if gb_AI:
+			return
+		gb_Hold = true
+		set_axis_velocity(Vector2(0, 0))
+		gv2_Hold_Pos = get_global_mouse_position()
 	Human_Rotate()
 	Human_Shoot()
 	AI_Shoot()
 
-func _input_event(viewport, event, shape_idx):
-	if gb_AI:
-		return
-	if event.is_action_pressed("Hold"):
-		gb_Hold = true
 		
+func Reset():
+	await  get_tree().create_timer(0.01).timeout
+	set_axis_velocity(Vector2(0, 0))
+	freeze = false
+	gb_Hold = false
+	gb_Hit_Ball = false
+	
 func Human_Rotate():
 	if gb_AI:
 		return
 	if not gb_Hold:
 		return
-	look_at(get_global_mouse_position())
+	look_at((get_global_mouse_position() - gv2_Hold_Pos) + global_position)
 	
 func AI_Shoot():
 	if not gb_AI:
@@ -68,16 +80,16 @@ func Human_Shoot():
 	if not gb_Hold:
 		return
 	gb_Hold = false
-	Shoot(get_global_mouse_position())
+	Shoot(get_global_mouse_position() - gv2_Hold_Pos)
 	
 func Shoot(gv2_Dir_Power : Vector2):
 	gf_Time_Since_Last_Shoot = 0
 	
 	gb_Hit_Ball = true
-	var lv2_Dir = gv2_Dir_Power - global_position
+	var lv2_Dir = gv2_Dir_Power
 	var lf_Shoot_Power = lv2_Dir.length() * 100
 	lf_Shoot_Power = clamp(lf_Shoot_Power, 100, 10000)
-	lv2_Dir = -lv2_Dir.normalized()
+	lv2_Dir = (-lv2_Dir).normalized()
 	apply_central_force(lv2_Dir * lf_Shoot_Power)
 	gg_Shoot_Audio_Player.pitch_scale = randf_range(-0.2, 0.1) + 1
 	gg_Shoot_Audio_Player.volume_db = linear_to_db(lf_Shoot_Power / 10000)
