@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://wbchfkq1w0bd"]
+[gd_scene load_steps=8 format=3 uid="uid://wbchfkq1w0bd"]
 
 [ext_resource type="Texture2D" uid="uid://uvhlp8b3tjlb" path="res://Assets/Art/Field/Field.png" id="1_dxfol"]
 [ext_resource type="Script" path="res://Scenes/Field/Field.gd" id="1_xhkei"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cp3feam2lv7bj" path="res://Scenes/Wall/Wall.tscn" id="3_44ruf"]
 [ext_resource type="PackedScene" uid="uid://du4biycxjdbn2" path="res://Scenes/Ball_Area/Ball_Area.tscn" id="4_1pvgg"]
 [ext_resource type="AudioStream" uid="uid://ctvc53a8ans7a" path="res://Assets/Sound/Effects/Dark_Ambient.mp3" id="6_j0i0m"]
+[ext_resource type="AudioStream" uid="uid://blby51838k14r" path="res://Assets/Sound/Effects/Creepy_Score.mp3" id="7_hmtmr"]
 
 [node name="Field" type="Node2D"]
 script = ExtResource("1_xhkei")
@@ -48,3 +49,8 @@ scale = Vector2(47.8533, 53.9733)
 stream = ExtResource("6_j0i0m")
 volume_db = 4.952
 autoplay = true
+
+[node name="Score_Audio_Player" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("7_hmtmr")
+volume_db = -5.0

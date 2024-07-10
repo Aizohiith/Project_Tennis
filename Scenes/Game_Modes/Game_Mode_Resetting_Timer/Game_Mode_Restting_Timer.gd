@@ -31,13 +31,16 @@ func _process(delta):
 			gg_Field.enum_Ball_Sides.LEFT:
 				lbl_Timer.text += "Right Won\n"
 				gi_Team_2_Score += 1
+				gg_Field.Score()
 			gg_Field.enum_Ball_Sides.RIGHT:
 				lbl_Timer.text += "Left Won\n"
 				gi_Team_1_Score += 1
+				gg_Field.Score()
 			gg_Field.enum_Ball_Sides.LINE:
 				lbl_Timer.text += "Line: Draw\n"
 				gi_Team_1_Score += 1
 				gi_Team_2_Score += 1
+				gg_Field.Score()
 			gg_Field.enum_Ball_Sides.OUT:
 				lbl_Timer.text += "Out: Rematch\n"
 		get_tree().paused = true

@@ -34,9 +34,11 @@ func Smashing():
 		if gi_Smash_Start_Side == gg_Field.gg_Ball_Side:
 			if gi_Smash_Start_Side == gg_Field.enum_Ball_Sides.LEFT:
 				gi_Team_1_Score += 1
+				gg_Field.Score()
 				Reset_Smash_Info()
 			if gi_Smash_Start_Side == gg_Field.enum_Ball_Sides.RIGHT:
 				gi_Team_2_Score += 1
+				gg_Field.Score()
 				Reset_Smash_Info()
 func Reset_Smash_Info():
 	gb_Smashing = false

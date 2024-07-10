@@ -3,6 +3,7 @@ extends Node2D
 @onready var gg_Left = $Left
 @onready var gg_Right = $Right
 @onready var gg_Sprite = $Sprite
+@onready var gg_Score_Audio_Player = $Score_Audio_Player
 
 var garr_Sprites = [
 	preload("res://Assets/Art/Field/Field.png"),
@@ -17,6 +18,8 @@ var gg_Ball_Side = enum_Ball_Sides.LINE
 func _ready():
 	Reset()
 
+func Score():
+	gg_Score_Audio_Player.play()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if ( gg_Left.Ball_Count() == gg_Right.Ball_Count() and gg_Right.Ball_Count() == 0):
