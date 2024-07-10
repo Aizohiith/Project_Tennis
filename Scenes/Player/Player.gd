@@ -4,6 +4,8 @@ extends RigidBody2D
 @export var gf_AI_Shoot_Interval_Mean : float = 1.5
 @export var gf_AI_Shoot_Interval_STD : float = 1.0
 
+signal gg_Smash
+
 var gb_Selected : bool = false
 var gb_Hold : bool = false
 var gv2_Hold_Pos : Vector2
@@ -204,6 +206,7 @@ func _on_sound_area_area_entered(area):
 		Game_Manager.gg_Screen_Shake.emit(10)
 		gg_Hit_Audio_Player.volume_db = linear_to_db(linear_velocity.length() / 500)
 		gg_Hit_Audio_Player.play()
+		gg_Smash.emit(self)
 		gb_Hit_Ball = false
 	if area.get_parent().is_in_group("Player") or area.is_in_group("Sound_Area"):
 		Game_Manager.gg_Screen_Shake.emit(2)
